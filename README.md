@@ -11,7 +11,8 @@ Exports limits and usage for metrics available through the GCP APIs (currently o
   * To use a credentials.json key file export the environment variable `GOOGLE_APPLICATION_CREDENTIALS=path-to-credentials.json`
 1. The exporter need to know which project to monitor quotas for
   * Specify project using `--gcp.project_id`  
-  * Export environment variable `GOOGLE_PROJECT_ID`
+  * Export environment variable `GOOGLE_PROJECT_ID` or `GOOGLE_FOLDER_ID`
+  
   * Fetch from compute metadata `http://metadata.google.internal/computeMetadata/v1/project/project-id`
 
 ## Docker-compose

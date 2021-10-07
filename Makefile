@@ -34,3 +34,10 @@ ifndef GOOGLE_APPLICATION_CREDENTIALS
 	$(error GOOGLE_APPLICATION_CREDENTIALS is undefined)
 endif
 .PHONY : check-env
+
+release:
+	@test -n "$$VERSION" || (echo 'VERSION env variable must be set' >&2; exit 1)
+	docker build -t altinity/gcp-quota-exporter:$$VERSION .
+	git tag -a v${VERSION} -m v${VERSION}
+	git push origin v${VERSION}
+	docker push altinity/gcp-quota-exporter:$$VERSION
