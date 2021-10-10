@@ -11,9 +11,11 @@ RUN go mod download
 COPY . .
 RUN make build
 
-FROM scratch
+FROM alpine:3.12
+
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=alpine /app/gcp-quota-exporter /app/
+
 WORKDIR /app
-EXPOSE 9592
-ENTRYPOINT ["./gcp-quota-exporter"]
+RUN chmod +x /app/gcp-quota-exporter
+ENTRYPOINT ["/app/gcp-quota-exporter"]
